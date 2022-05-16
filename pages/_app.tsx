@@ -1,8 +1,10 @@
-import '../styles/globals.scss';
-import type { AppProps } from 'next/app';
+import 'styles/globals.scss';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 
-function MyApp({ Component, pageProps }: AppProps) {
+import '98.css';
+
+const App = ({ Component, pageProps }: AppProps) => {
     return (
         <Component {...pageProps}>
             <Head>
@@ -30,6 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             </Head>
         </Component>
     );
-}
+};
 
-export default MyApp;
+export default App;

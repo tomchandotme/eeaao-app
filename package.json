@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "98.css": "^0.1.17",
     "delaunator": "^5.0.0",
     "lodash": "^4.17.21",
     "next": "12.1.6",

@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { generateUniverses, UniverseLink, UniverseNode } from 'utils/universes';
+import { max } from 'lodash';
+import { random } from 'utils/random';
 
-const WIDTH = 1024;
+const WIDTH = 512;
 const HEIGHT = 512;
+const PADDING = WIDTH > HEIGHT ? WIDTH : HEIGHT / 8;
+const MIN_DISTANCE = 128;
 
 const GridBackground = ({
     size = 16,
@@ -43,15 +47,15 @@ const GridBackground = ({
         </pattern>
         <rect
             fill={blackgroundColor}
-            x={-512}
-            y={-256}
+            x={-0.5 * WIDTH}
+            y={-0.5 * HEIGHT}
             width="100%"
             height="100%"
         />
         <rect
             fill="url(#pattern)"
-            x={-512}
-            y={-256}
+            x={-0.5 * WIDTH}
+            y={-0.5 * HEIGHT}
             width="100%"
             height="100%"
             stroke={stroke}
@@ -86,13 +90,15 @@ const UniversesMap = () => {
     const [links, setLinks] = useState<UniverseLink[]>([]);
 
     const setup = () => {
+        const count = random(36, 49);
+
         const { nodes, lines } = generateUniverses(
-            36,
-            -0.5 * (WIDTH - 64),
-            0.5 * (WIDTH - 64),
-            -0.5 * (HEIGHT - 64),
-            0.5 * (HEIGHT - 64),
-            128
+            count,
+            -0.5 * (WIDTH - PADDING),
+            0.5 * (WIDTH - PADDING),
+            -0.5 * (HEIGHT - PADDING),
+            0.5 * (HEIGHT - PADDING),
+            MIN_DISTANCE
         );
         setUniverses(nodes);
         setLinks(lines);
@@ -121,7 +127,9 @@ const UniversesMap = () => {
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke="#fff"
+                    stroke="#fffc"
+                    strokeWidth={2}
+                    strokeDasharray={`8 8`}
                 />
             ))}
 

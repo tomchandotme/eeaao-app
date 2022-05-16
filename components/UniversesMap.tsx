@@ -3,10 +3,10 @@ import { generateUniverses, UniverseLink, UniverseNode } from 'utils/universes';
 import { max } from 'lodash';
 import { random } from 'utils/random';
 
-const WIDTH = 512;
+const WIDTH = 768;
 const HEIGHT = 512;
-const PADDING = WIDTH > HEIGHT ? WIDTH : HEIGHT / 8;
-const MIN_DISTANCE = 128;
+const PADDING = WIDTH > HEIGHT ? WIDTH / 8 : HEIGHT / 8;
+const MIN_DISTANCE = 64;
 
 const GridBackground = ({
     size = 16,

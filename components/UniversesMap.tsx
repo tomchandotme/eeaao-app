@@ -78,8 +78,8 @@ const Universe = ({
     <circle
         cx={x}
         cy={y}
-        r={main ? 12 : 8}
-        fill="#888"
+        r={main ? 16 : 8}
+        fill={main ? '#ff6' : '#888'}
         stroke="#fff"
         strokeWidth={2}
     />

@@ -119,7 +119,9 @@ const UniversesMap = () => {
         setSelected(undefined);
     };
 
-    useEffect(() => setup, []);
+    useEffect(() => {
+        setup();
+    }, []);
 
     useEffect(() => {
         if (!isUndefined(selected) && selected > 0) {

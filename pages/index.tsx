@@ -40,6 +40,10 @@ const HomePage: NextPage = () => {
                 <div className="window-body">
                     <UniversesMap />
                 </div>
+                <div className="status-bar">
+                    <p className="status-bar-field">STABLE</p>
+                    <p className="status-bar-field">{}</p>
+                </div>
             </div>
         </div>
     );

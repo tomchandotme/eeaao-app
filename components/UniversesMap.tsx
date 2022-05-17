@@ -144,7 +144,7 @@ const UniversesMap = () => {
                 size={16}
                 strokeWidth={1}
                 stroke="#fff2"
-                blackgroundColor="#004"
+                blackgroundColor="#004c"
             />
 
             {links.map(({ x1, y1, x2, y2 }, i) => (

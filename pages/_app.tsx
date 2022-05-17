@@ -38,7 +38,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 />
                 <link rel="manifest" href="/site.webmanifest" />
             </Head>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
         </>
     );
 };

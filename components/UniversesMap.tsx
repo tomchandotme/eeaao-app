@@ -8,9 +8,11 @@ import {
 import { random } from 'utils/random';
 import { isUndefined } from 'lodash';
 
+import Styles from 'styles/Universes.module.scss';
+
 const WIDTH = 512;
 const HEIGHT = 512;
-const PADDING = WIDTH > HEIGHT ? WIDTH / 8 : HEIGHT / 8;
+const PADDING = (WIDTH > HEIGHT ? WIDTH : HEIGHT) / 8;
 const MIN_DISTANCE = 64;
 
 const GridBackground = ({
@@ -85,6 +87,7 @@ const Universe = ({
     onClick?: () => any;
 }) => (
     <circle
+        className={main ? 'main' : selected ? 'selected' : undefined}
         id={`node_${id}`}
         cx={x}
         cy={y}
@@ -101,7 +104,7 @@ const UniversesMap = () => {
     const [links, setLinks] = useState<UniverseLink[]>([]);
 
     const [selected, setSelected] = useState<number>();
-    const [highLighted, setHighLighted] = useState<number[]>([]);
+    const [highlighted, sethighlighted] = useState<number[]>([]);
 
     const setup = () => {
         const count = random(36, 49);
@@ -117,6 +120,7 @@ const UniversesMap = () => {
         setUniverses(nodes);
         setLinks(lines);
         setSelected(undefined);
+        sethighlighted([]);
     };
 
     useEffect(() => {
@@ -125,12 +129,13 @@ const UniversesMap = () => {
 
     useEffect(() => {
         if (!isUndefined(selected) && selected > 0) {
-            setHighLighted(calculateRoute(universes, links, selected));
+            sethighlighted(calculateRoute(universes, links, selected));
         }
     }, [selected]);
 
     return (
         <svg
+            className={Styles.universes}
             width={WIDTH}
             height={HEIGHT}
             viewBox={`${-0.5 * WIDTH} ${-0.5 * HEIGHT} ${WIDTH} ${HEIGHT}`}
@@ -144,13 +149,16 @@ const UniversesMap = () => {
 
             {links.map(({ x1, y1, x2, y2 }, i) => (
                 <line
+                    className={
+                        highlighted.includes(i) ? 'highlight' : undefined
+                    }
                     key={`link_${i}`}
                     x1={x1}
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke={highLighted.includes(i) ? '#ff4' : '#fffc'}
-                    strokeWidth={highLighted.includes(i) ? 4 : 2}
+                    stroke={highlighted.includes(i) ? '#ff4' : '#fffc'}
+                    strokeWidth={highlighted.includes(i) ? 4 : 2}
                     strokeDasharray={`8 8`}
                 />
             ))}

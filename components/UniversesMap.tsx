@@ -193,7 +193,7 @@ const UniversesMap = ({ onChange }: { onChange?: (v?: string) => any }) => {
                     key={`node_${name}`}
                     main={i === 0}
                     selected={i === selected}
-                    onClick={() => setSelected(i)}
+                    onClick={i > 0 ? () => setSelected(i) : () => {}}
                 />
             ))}
         </svg>

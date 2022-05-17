@@ -9,4 +9,8 @@
     overflow: hidden;
 
     background: linear-gradient(234deg, #001, #004);
+
+    .current {
+        flex: 0 0 max-content;
+    }
 }

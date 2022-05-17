@@ -76,30 +76,47 @@ const Universe = ({
     y = 0,
     main,
     selected,
-    id,
+    name,
     onClick,
 }: {
     x: number;
     y: number;
+    name?: string;
     main?: boolean;
     selected?: boolean;
-    id: string;
     onClick?: () => any;
 }) => (
-    <circle
-        className={main ? Styles.main : selected ? Styles.selected : undefined}
-        id={`node_${id}`}
-        cx={x}
-        cy={y}
-        r={main ? 12 : 8}
-        fill={main ? '#6f6' : selected ? '#6f6' : '#888'}
-        stroke={main ? '#6f66' : '#fff'}
-        strokeWidth={main ? 8 : 2}
-        onClick={onClick}
-    />
+    <>
+        <circle
+            className={
+                main ? Styles.main : selected ? Styles.selected : undefined
+            }
+            id={`Universe_${name}`}
+            cx={x}
+            cy={y}
+            r={main ? 12 : 8}
+            fill={main ? '#6f6' : selected ? '#6f6' : '#888'}
+            stroke={main ? '#6f66' : '#fff'}
+            strokeWidth={main ? 8 : 2}
+            onClick={onClick}
+        />
+        {(main || selected) && (
+            <text
+                x={x}
+                y={y + 28}
+                alignmentBaseline="central"
+                textAnchor="middle"
+                fill="#fff"
+                fontWeight={700}
+                fontSize={14}
+            >
+                {name}
+            </text>
+        )}
+    </>
 );
 
-const UniversesMap = () => {
+const UniversesMap = ({ onChange }: { onChange?: (v?: string) => any }) => {
     const [universes, setUniverses] = useState<UniverseNode[]>([]);
     const [links, setLinks] = useState<UniverseLink[]>([]);
 
@@ -131,6 +148,11 @@ const UniversesMap = () => {
         if (!isUndefined(selected) && selected > 0) {
             sethighlighted(calculateRoute(universes, links, selected));
         }
+
+        if (onChange)
+            onChange(
+                isUndefined(selected) ? undefined : universes[selected].name
+            );
     }, [selected]);
 
     return (
@@ -163,12 +185,12 @@ const UniversesMap = () => {
                 />
             ))}
 
-            {universes.map(({ x, y }, i) => (
+            {universes.map(({ x, y, name }, i) => (
                 <Universe
-                    id={`node_${i}`}
+                    name={name}
                     x={x}
                     y={y}
-                    key={`node_${i}`}
+                    key={`node_${name}`}
                     main={i === 0}
                     selected={i === selected}
                     onClick={() => setSelected(i)}

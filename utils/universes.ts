@@ -1,10 +1,12 @@
 import { isUndefined, flatten, chunk, min } from 'lodash';
 import { distance } from './points';
 import { random } from './random';
+import { customAlphabet } from 'nanoid';
 
 import Delaunator from 'delaunator';
 
 export type UniverseNode = {
+    name: string;
     x: number;
     y: number;
     near: number[];
@@ -18,6 +20,16 @@ export type UniverseLink = {
     y2: number;
 };
 
+const generateUniverseName = () => {
+    const numbers = '0123456789';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    const pre = customAlphabet(alphabet, 3);
+    const post = customAlphabet(numbers, 6);
+
+    return `${pre()}-${post()}`;
+};
+
 export const generateUniverses = (
     count: number,
     minX: number,
@@ -26,7 +38,7 @@ export const generateUniverses = (
     maxY: number,
     minDistance: number
 ) => {
-    let nodes: UniverseNode[] = [{ x: 0, y: 0, near: [] }];
+    let nodes: UniverseNode[] = [{ x: 0, y: 0, name: 'EVELYN', near: [] }];
     for (let i = 0; i < count; i++) {
         const x = random(minX, maxX);
         const y = random(minY, maxY);
@@ -43,7 +55,8 @@ export const generateUniverses = (
         }
         if (tooClose) continue;
         else {
-            nodes.push({ x, y, near: [] });
+            const name = generateUniverseName();
+            nodes.push({ x, y, name, near: [] });
         }
     }
 

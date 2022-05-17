@@ -16,6 +16,10 @@
     .highlight {
         animation: selected-stroke 1s ease-in infinite;
     }
+
+    * {
+        user-select: none;
+    }
 }
 
 @keyframes main-stroke {

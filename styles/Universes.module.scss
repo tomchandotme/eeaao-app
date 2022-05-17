@@ -1,4 +1,41 @@
 .universes {
     max-width: 90vmin;
     max-height: 90vmin;
+
+    .main {
+        animation: main-stroke 1s ease-in infinite;
+    }
+
+    .selected {
+        animation: selected-stroke 1s ease-in infinite;
+        // filter: drop-shadow(0px 0px 4px #fff);
+    }
+
+    .highlight {
+        animation: selected-stroke 1s ease-in infinite;
+    }
+}
+
+@keyframes main-stroke {
+    0%,
+    100% {
+        stroke-width: 4px;
+        filter: drop-shadow(0px 0px 4px #6f6);
+    }
+
+    50% {
+        stroke-width: 16px;
+        filter: drop-shadow(0px 0px 16px #6f6);
+    }
+}
+
+@keyframes selected-stroke {
+    0%,
+    100% {
+        filter: drop-shadow(0px 0px 2px #fff);
+    }
+
+    50% {
+        filter: drop-shadow(0px 0px 6px #fff);
+    }
 }

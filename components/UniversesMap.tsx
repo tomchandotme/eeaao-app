@@ -87,7 +87,7 @@ const Universe = ({
     onClick?: () => any;
 }) => (
     <circle
-        className={main ? 'main' : selected ? 'selected' : undefined}
+        className={main ? Styles.main : selected ? Styles.selected : undefined}
         id={`node_${id}`}
         cx={x}
         cy={y}
@@ -150,7 +150,7 @@ const UniversesMap = () => {
             {links.map(({ x1, y1, x2, y2 }, i) => (
                 <line
                     className={
-                        highlighted.includes(i) ? 'highlight' : undefined
+                        highlighted.includes(i) ? Styles.highlight : undefined
                     }
                     key={`link_${i}`}
                     x1={x1}
